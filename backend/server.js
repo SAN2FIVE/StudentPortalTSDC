@@ -46,6 +46,11 @@ app.get('/', (req, res) => {
     res.json({ message: "TSDC Campus API is running", status: "ok" });
 });
 
+// Catch-all root for other methods
+app.all('/', (req, res) => {
+    res.json({ message: "TSDC Campus API Root", use: "/api/notices or /api/students" });
+});
+
 // Get all notices
 app.get('/api/notices', (req, res) => {
     try {
