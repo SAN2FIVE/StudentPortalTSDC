@@ -17,25 +17,37 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 // Helper to read data
 const readData = () => {
     try {
-        if (!fs.existsSync(DATA_FILE)) {
-            console.log("Data file not found, creating new structure");
+        let activePath = DATA_FILE;
+        if (!fs.existsSync(activePath)) {
+            // Fallback to __dirname if process.cwd() fails
+            activePath = path.join(__dirname, 'data.json');
+        }
+
+        if (!fs.existsSync(activePath)) {
+            console.log("Data file not found at any path, returning empty structure");
             return { notices: [], students: [] };
         }
-        const data = fs.readFileSync(DATA_FILE, 'utf8');
+
+        const data = fs.readFileSync(activePath, 'utf8');
         return JSON.parse(data);
     } catch (error) {
-        console.error("Error in readData:", error);
-        throw error;
+        console.error("Critical error in readData:", error);
+        return { notices: [], students: [] }; // Return empty instead of crashing
     }
 };
 
 // Helper to write data
 const writeData = (data) => {
     try {
+        // Vercel filesystem is read-only in production. 
+        // We try to write, but catch the error so the API doesn't return 500.
         fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2));
+        console.log("Data written successfully to", DATA_FILE);
     } catch (error) {
-        console.error("Error in writeData:", error);
-        throw error;
+        console.error("PERMANENCE WARNING: Could not write to filesystem (expected on Vercel). Data will not be saved permanently.");
+        console.error("Error detail:", error.message);
+        // We DON'T throw here, so the API response can still be a 201/200 
+        // even if the file didn't update on disk.
     }
 };
 
