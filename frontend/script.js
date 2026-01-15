@@ -1,5 +1,5 @@
 // --- 1. CONFIGURATION ---
-const API_URL = 'http://localhost:5001/api';
+const API_URL = 'https://tsdc-campus-server.vercel.app/api';
 
 // --- 1. ADMIN AUTHENTICATION ---
 function verifyAdmin() {
