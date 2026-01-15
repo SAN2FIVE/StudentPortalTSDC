@@ -161,18 +161,24 @@ if (loginForm) {
         if (dept && name) {
             try {
                 // Save student login to backend
-                await fetch(`${API_URL}/students`, {
+                const response = await fetch(`${API_URL}/students`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ name, dept })
                 });
 
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error("Failed to save student login:", response.status, errorText);
+                } else {
+                    console.log("Student login recorded successfully");
+                }
+
                 sessionStorage.setItem('userDept', dept);
                 sessionStorage.setItem('userName', name);
                 window.location.href = 'board.html';
             } catch (error) {
-                console.error("Error saving student login:", error);
-                // Still proceed even if backend call fails (for resilience)
+                console.error("Network error saving student login:", error);
                 sessionStorage.setItem('userDept', dept);
                 sessionStorage.setItem('userName', name);
                 window.location.href = 'board.html';

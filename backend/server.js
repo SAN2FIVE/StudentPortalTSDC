@@ -131,6 +131,7 @@ app.delete('/api/notices/:id', (req, res) => {
 app.post('/api/students', (req, res) => {
     try {
         const { name, dept } = req.body;
+        console.log("LOGIN ATTEMPT:", name, dept);
         if (!name || !dept) {
             return res.status(400).json({ message: "Name and Dept are required" });
         }
@@ -147,8 +148,10 @@ app.post('/api/students', (req, res) => {
         db.students.push(newStudent);
         writeData(db);
 
+        console.log("LOGIN SAVED:", name);
         res.status(201).json(newStudent);
     } catch (error) {
+        console.error("LOGIN ERROR:", error);
         res.status(500).json({ message: "Error saving student data", error: error.message });
     }
 });
