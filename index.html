@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TSDC | Student Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-blob blob-1"></div>
+    <div class="bg-blob blob-2"></div>
+
+    <div class="app-container">
+        <header class="text-center mb-5 animate-fade-in">
+            <img src="logo.png" alt="TSDC Logo" class="app-logo-small mb-3" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3665/3665922.png'">
+            <h1 class="brand-title">TSDC Campus</h1>
+        </header>
+
+        <section class="chalk-card">
+            <h2 class="section-title">Student Portal</h2>
+            <p class="section-subtitle mb-4">Select department to enter</p>
+            
+            <form id="loginForm">
+                <input type="text" id="studentName" class="chalk-input mb-3" placeholder="Enter Full Name" required>
+                <select id="studentDept" class="chalk-input mb-4" required>
+                    <option value="" disabled selected>Select Department</option>
+                    <option value="BSCIT">B.Sc. IT</option>
+                    <option value="BSCDS">B.Sc. Data Science</option>
+                    <option value="BSCCS">B.Sc. Computer Science</option>
+                    <option value="BCA">BCA</option>
+                </select>
+                <button type="submit" class="btn-emerald">Enter Dashboard</button>
+            </form>
+            <div class="text-center mt-4">
+                <a href="admin.html" class="admin-link">Admin Access Portal →</a>
+            </div>
+        </section>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

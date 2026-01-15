@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TSDC | Live Notice Board</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="bg-blob blob-1"></div>
+    <div class="bg-blob blob-2"></div>
+
+    <div class="app-container">
+        <header class="d-flex justify-content-between align-items-center mb-5 py-2 animate-fade-in">
+            <div>
+                <h2 class="text-white fw-800 m-0" id="deptHeading" style="font-weight: 800;">Live Board</h2>
+                <div class="d-flex align-items-center mt-1">
+                    <span class="badge bg-white text-dark rounded-pill fw-bold" id="deptBadge"
+                        style="font-size: 0.8rem; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">Department</span>
+                </div>
+            </div>
+            <button onclick="logoutStudent()" class="btn btn-danger rounded-pill px-4 fw-bold"
+                style="background: #ef4444; border: none; box-shadow: 0 10px 20px rgba(239, 68, 68, 0.3);">Exit</button>
+        </header>
+
+        <div class="search-pill mb-4">
+            <span class="ms-3 me-2">🔍</span>
+            <input type="text" id="noticeSearch" placeholder="Search notices by title..." onkeyup="filterNotices()">
+        </div>
+
+        <div id="noticesList" class="notices-stack mt-2">
+            <!-- Notices will be rendered here -->
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        window.onload = () => {
+            const dept = sessionStorage.getItem('userDept');
+            if (!dept) {
+                window.location.href = 'index.html';
+                return;
+            }
+            document.getElementById('deptBadge').innerText = dept;
+            renderBoard();
+        }
+
+        function logoutStudent() {
+            sessionStorage.clear();
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+
+</html>
