@@ -1,5 +1,6 @@
 // --- 1. CONFIGURATION ---
-const API_URL = 'https://tsdc-campus-server.vercel.app/api';
+//const API_URL = 'https://tsdc-campus-server.vercel.app/api';
+const API_URL = 'https://student-portal-tsdc-server.vercel.app/api';
 
 // --- 1. ADMIN AUTHENTICATION ---
 function verifyAdmin() {
